@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "height": 60,
+      "opacity": 1,
+      "width": "100%",
+    }
+  }
+  testID="headerBackButton"
+>
+  <Image
+    source={
+      {
+        "testUri": "../../../src/assets/ic_back.png",
+      }
+    }
+    style={
+      {
+        "height": 22,
+        "padding": 10,
+        "tintColor": "#000",
+        "width": 22,
+      }
+    }
+  />
+  <Text
+    style={
+      {
+        "color": "#444",
+        "fontSize": 26,
+        "fontWeight": "700",
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Home renders correctly 1`] = `
+<RNCSafeAreaView
+  edges={
+    {
+      "bottom": "additive",
+      "left": "additive",
+      "right": "additive",
+      "top": "additive",
+    }
+  }
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "#f0f0f0",
+      "flex": 1,
+      "minHeight": 1334,
+      "paddingHorizontal": 15,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 60,
+          "justifyContent": "space-between",
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#444",
+            "fontSize": 26,
+            "fontWeight": "700",
+          }
+        }
+      >
+        Home
+      </Text>
+      <View
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": undefined,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "opacity": 1,
+          }
+        }
+      >
+        <Image
+          source={
+            {
+              "testUri": "../../../src/assets/search.png",
+            }
+          }
+          style={
+            {
+              "alignItems": "flex-end",
+              "height": 22,
+              "padding": 10,
+              "tintColor": "#000",
+              "width": 22,
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        {
+          "flex": 1,
+        }
+      }
+    >
+      <RCTScrollView
+        ListEmptyComponent={[Function]}
+        ListFooterComponent={[Function]}
+        contentContainerStyle={
+          {
+            "flexGrow": 1,
+            "gap": 10,
+          }
+        }
+        data={[]}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        keyExtractor={[Function]}
+        onContentSizeChange={[Function]}
+        onEndReached={[Function]}
+        onEndReachedThreshold={0.1}
+        onLayout={[Function]}
+        onMomentumScrollBegin={[Function]}
+        onMomentumScrollEnd={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        scrollEventThrottle={0.0001}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={[]}
+        viewabilityConfigCallbackPairs={[]}
+      >
+        <View>
+          <View
+            onLayout={[Function]}
+          >
+            <View>
+              <Text />
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
+  </View>
+</RNCSafeAreaView>
+`;
