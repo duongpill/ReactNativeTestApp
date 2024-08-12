@@ -12,7 +12,7 @@ const Search: FC = () =>  {
     const [searchQuery, setSearchQuery] = useState('');
 
     const searchUser = async() => {
-        const userResponse = await Dependencies.instance.getSearchRepository().search(searchQuery)
+        const userResponse = await Dependencies.instance.searchUserUseCase().search(searchQuery)
         if(userResponse){
             setSearchQuery('')
             setUsers([])

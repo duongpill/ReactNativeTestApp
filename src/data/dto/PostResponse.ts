@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { UserResponse } from "./UserResponse";
 
 export interface PostResponse {
     data: PostData;
@@ -6,19 +6,19 @@ export interface PostResponse {
 }
 
 export interface PostDetailResponse {
-    data: Post;
+    data: PostItem;
 }
 
 export interface PostData {
     count: number;
-    items: Array<Post>;
+    items: Array<PostItem>;
     profile_grid_items: any;
     profile_grid_items_cursor: any;
-    user: User;
+    user: UserResponse;
     pagination_token: string;
 }
 
-export interface Post {
+export interface PostItem {
     id: string;
     comment_count: number;
     thumbnail_url: string;

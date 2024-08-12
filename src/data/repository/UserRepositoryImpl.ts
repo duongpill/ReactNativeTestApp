@@ -1,8 +1,8 @@
-import { SearchRepository } from "../domain/SearchRepository";
-import { UserResponse } from "../models/User";
-import { API } from "../utils/Constants";
+import { UserRepository } from "../../domain/repository/UserRepository";
+import { API } from "../../utils/Constants";
+import { UserResponse } from "../dto/User";
 
-export class SearchRepositoryImpl implements SearchRepository {
+export class UserRepositoryImpl implements UserRepository {
     async search(query: string): Promise<UserResponse | null> {
         const url = `${API.url}/v1/search_users?search_query=${query}`;
         const options = {

@@ -1,6 +1,6 @@
-import { PostRepository } from "../domain/PostRepository";
-import { PostDetailResponse, PostResponse } from "../models/Post";
-import { API } from "../utils/Constants";
+import { PostRepository } from "../../domain/repository/PostRepository";
+import { API } from "../../utils/Constants";
+import { PostDetailResponse, PostResponse } from "../dto/Post";
 
 export class PostRepositoryImpl implements PostRepository {
     async loadPost(): Promise<PostResponse | null> {
@@ -8,7 +8,7 @@ export class PostRepositoryImpl implements PostRepository {
     }
     
     async loadMorePost(pagination_token: string): Promise<PostResponse | null> {
-      var url = `${API.url}/v1.2/posts?username_or_id_or_url=mrbeast`;
+      let url = `${API.url}/v1.2/posts?username_or_id_or_url=mrbeast`;
       if(pagination_token){
         url = `${url}&pagination_token=${pagination_token}`;
       }
