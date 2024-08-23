@@ -1,17 +1,17 @@
 import React, { FC, memo } from "react";
-import { User } from "../../models/User";
 import { Text, View } from "react-native";
 import FastImage from "react-native-fast-image";
 import styles from "../../../styles/UserStyles"
+import { User } from "../../domain/entity/User";
 
-const UserItem: FC<User> = ({id, full_name, is_private, isverified, profile_pic_url, profile_pic_id, username}) => {
+const UserItem: FC<User> = ({id, fullName, profilePicUrl, userName}) => {
     return (
         <View style={styles.container}>
             <FastImage style={styles.avatarStyle}
-                source={{ uri: profile_pic_url }} />
+                source={{ uri: profilePicUrl }} />
             <View>
-                <Text style={styles.userNameStyle}>{username}</Text>
-                <Text style={styles.userNameStyle}>{full_name}</Text>
+                <Text style={styles.userNameStyle}>{userName}</Text>
+                <Text style={styles.userNameStyle}>{fullName}</Text>
             </View>
         </View>
     );

@@ -1,15 +1,15 @@
-import { UserResponse } from "../../data/dto/User";
+import { User } from "../entity/User";
 import { UserRepository } from "../repository/UserRepository";
 
 export class SearchUserUseCase {
 
-    userRepository: UserRepository;
+    userRepository?: UserRepository;
 
-    constructor(userRepository: UserRepository){
+    constructor(userRepository?: UserRepository){
         this.userRepository = userRepository;
     }
 
-    async invoke(query: string): Promise<UserResponse | null>{
-        return this.userRepository.search(query);
+    async invoke(query: string): Promise<User[] | null | undefined>{
+        return this.userRepository?.search(query);
     }
 }

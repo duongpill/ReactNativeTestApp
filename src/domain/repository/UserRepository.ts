@@ -1,5 +1,5 @@
-import { UserResponse } from "../../data/dto/User";
+import { User } from "../entity/User";
 
 export interface UserRepository {
-    search(query: string): Promise<UserResponse | null>;
+    search(query: string): Promise<User[] | null>;
 }

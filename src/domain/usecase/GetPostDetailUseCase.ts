@@ -3,13 +3,13 @@ import { PostRepository } from "../repository/PostRepository";
 
 export class GetPostDetailUseCase {
 
-    postRepository: PostRepository;
+    postRepository?: PostRepository;
 
-    constructor(postRepository: PostRepository){
+    constructor(postRepository?: PostRepository){
         this.postRepository = postRepository;
     }
 
-    async invoke(id: string): Promise<Post | null>{
-        return this.postRepository.getPostDetail(id);
+    async invoke(id: string): Promise<Post | null | undefined>{
+        return this.postRepository?.getPostDetail(id);
     }
 }

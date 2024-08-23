@@ -1,15 +1,15 @@
-import { PostResponse } from "../../data/dto/Post";
+import { WrappedPostsResponse } from "../../data/WrappedPostsResponse";
 import { PostRepository } from "../repository/PostRepository";
 
-export class GetPostUseCase {
+export class GetPostsUseCase {
 
-    postRepository: PostRepository;
+    postRepository?: PostRepository;
 
-    constructor(postRepository: PostRepository){
+    constructor(postRepository?: PostRepository){
         this.postRepository = postRepository;
     }
 
-    async invoke(): Promise<PostResponse | null>{
-        return this.postRepository.loadPost();
+    async invoke(pagination_token?: string): Promise<WrappedPostsResponse | null | undefined>{
+        return this.postRepository?.loadPosts(pagination_token);
     }
 }

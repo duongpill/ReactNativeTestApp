@@ -13,49 +13,43 @@ import {
   View,
 } from 'react-native';
 import styles from '../../styles/HomeStyles';
-import { Post, PostResponse } from '../models/Post';
 import PostCard from './components/PostCard';
-import { Dependencies } from '../di/Dependencies';
+import { DependencyInjections } from '../di/DependencyInjections';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import HomeHeader from './components/HomeHeader';
+import { Post } from '../domain/entity/Post';
+import Loading from './components/Loading';
 
 const Home: FC = () => {
 
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<Post[]>([]);
-  const [paginationToken, setPaginationToken] = useState('');
+  const [paginationToken, setPaginationToken] = useState<string>()
 
   useEffect(() => {
-    fetchData('')
+    fetchData()
   }, []);
 
-  const fetchData = async(pagination_token: string) => {
+  const fetchData = async() => {
     if(loading) {
       return;
     }
 
-    var postResponse: PostResponse | null
     setLoading(true)
-    if(pagination_token){
-      postResponse = await Dependencies.instance.getPostRepository().loadMorePost(pagination_token)
-    } else {
-      postResponse = await Dependencies.instance.getPostRepository().loadPost()
-    }
+    var postResponse = await DependencyInjections.instance().getPostsUseCase(paginationToken)
+    console.log("data: " + postResponse + " -- " + paginationToken)
     if(postResponse){
-      // console.log("Post: " + postResponse.data.items.length)
-      setItems([...items, ...postResponse.data.items])
-      setPaginationToken(postResponse.pagination_token)
+      setItems([...items, ...postResponse.posts])
+      setPaginationToken(postResponse.paginationToken)
     }
     setLoading(false)
   }
 
-  // Function to handle load more (pagination)
   const loadMore = () => {
-    // console.log('loadmore: ' + paginationToken + ' -- ' + loading)
-    if (!loading) {
-      fetchData(paginationToken);
+    if(!loading){
+      fetchData()
     }
-  };
+  }
 
   const renderFooter = () => {
     return (
@@ -73,18 +67,17 @@ const Home: FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <HomeHeader title="Home"/>
+        <HomeHeader title="Home" />
+        {(items.length == 0) && <Loading isLoading={loading} />}
         <View style={styles.flatListContainer}>
           <FlatList
             data={items}
             contentContainerStyle={{ gap: 10, flexGrow: 1 }}
             showsVerticalScrollIndicator={false}
-            renderItem={({item, index}) => (
-              <PostCard 
-                {...item}
-              />
+            renderItem={({item}) => (
+              <PostCard {...item} />
             )}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(index) => index.toString()}
             ListEmptyComponent={handleEmpty}
             ListFooterComponent={renderFooter}
             onEndReached={loadMore}

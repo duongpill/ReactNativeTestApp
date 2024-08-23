@@ -1,9 +1,8 @@
-import { PostDetailResponse, PostResponse } from "../models/Post";
+import { WrappedPostsResponse } from "../../data/WrappedPostsResponse";
+import { Post } from "../entity/Post";
 
 export interface PostRepository {
-    loadPost(): Promise<PostResponse | null>;
+    loadPosts(pagination_token?: string): Promise<WrappedPostsResponse | null>;
 
-    loadMorePost(pagination_token: string): Promise<PostResponse | null>;
-
-    getPostDetail(id: string): Promise<PostDetailResponse | null>;
+    getPostDetail(id?: string): Promise<Post | null>;
 }

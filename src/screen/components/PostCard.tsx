@@ -4,9 +4,9 @@ import FastImage from "react-native-fast-image";
 import styles from "../../../styles/PostStyles";
 import { useNavigation } from "@react-navigation/native";
 import VideoPlayer from "./VideoPlayer";
-import { Post } from "../../models/Post";
+import { Post } from "../../domain/entity/Post";
 
-const PostCard: FC<Post> = ({id, owner, has_liked, like_count, caption, is_video, thumbnail_url, video_url}) => {
+const PostCard: FC<Post> = ({id, owner, hasLiked, likeCount, caption, isVideo, thumbnailUrl, videoUrl}) => {
     
   const navigation = useNavigation<any>();
 
@@ -24,22 +24,22 @@ const PostCard: FC<Post> = ({id, owner, has_liked, like_count, caption, is_video
           <TouchableOpacity onPress={_moveToDetail}>
             <Text style={styles.textDescription}>{caption.text}</Text>
             <View style={styles.imageContainer}>
-            { is_video 
-                ? <VideoPlayer url={video_url} />
+            { isVideo 
+                ? <VideoPlayer url={videoUrl} />
                 : <FastImage 
                     style={styles.imageStyle} 
                     resizeMode={FastImage.resizeMode.cover} 
-                    source={{uri: thumbnail_url}} />  
+                    source={{uri: thumbnailUrl}} />  
             }
             </View>
           </TouchableOpacity>
           <View style={styles.reactions}>
               <Image
                   style={{width: 22, height: 22, marginLeft: 4, marginRight: 8}}
-                  source={has_liked ? require("../../assets/heart.png") :require("../../assets/heart_outline.png")}
-                  tintColor={has_liked ? 'red' : '#000'}
+                  source={hasLiked ? require("../../assets/heart.png") :require("../../assets/heart_outline.png")}
+                  tintColor={hasLiked ? 'red' : '#000'}
                   />
-              <Text style={styles.text}>{like_count}</Text>
+              <Text style={styles.text}>{likeCount}</Text>
           </View>
       </View>
   );

@@ -2,10 +2,10 @@ import React, { FC, memo, useEffect, useState } from "react";
 import { Image, ScrollView, Text, View } from "react-native";
 import styles from "../../styles/PostDetailStyles"
 import FastImage from "react-native-fast-image";
-import { Post } from "../models/Post";
-import { Dependencies } from "../di/Dependencies";
 import Header from "./components/Header";
 import VideoPlayer from "./components/VideoPlayer";
+import { Post } from "../domain/entity/Post";
+import { DependencyInjections } from "../di/DependencyInjections";
 
 const Detail: FC = ({route}: any) => {
 
@@ -19,9 +19,9 @@ const Detail: FC = ({route}: any) => {
 
   const getPostDetail = async() => {
     console.log(`post Detail: ${id}`)
-    const result = await Dependencies.instance.getPostRepository().getPostDetail(id);
-    if(result){
-        setPost(result.data)
+    const post = await DependencyInjections.instance().getPostDetailUseCase(id)
+    if(post){
+        setPost(post)
     }
   }
 
@@ -36,21 +36,21 @@ const Detail: FC = ({route}: any) => {
                 </View>
                 <Text style={styles.textDescription}>{post?.caption?.text}</Text>
                 <View style={styles.imageContainer}>
-                { post?.is_video 
-                    ? <VideoPlayer url={post?.video_url} />
+                { post?.isVideo 
+                    ? <VideoPlayer url={post?.videoUrl} />
                     : <FastImage 
                         style={styles.imageStyle} 
                         resizeMode={FastImage.resizeMode.cover} 
-                        source={{uri: post?.thumbnail_url}} />  
+                        source={{uri: post?.thumbnailUrl}} />  
                 }
                 </View>
                 <View style={styles.reactions}>
                     <Image
                         style={{width: 22, height: 22, marginLeft: 4, marginRight: 8}}
-                        source={post?.has_liked ? require("../assets/heart.png") :require("../assets/heart_outline.png")}
-                        tintColor={post?.has_liked ? 'red' : '#000'}
+                        source={post?.hasLiked ? require("../assets/heart.png") :require("../assets/heart_outline.png")}
+                        tintColor={post?.hasLiked ? 'red' : '#000'}
                         />
-                    <Text style={styles.text}>{post?.like_count ? post?.like_count : 0}</Text>
+                    <Text style={styles.text}>{post?.likeCount ? post?.likeCount : 0}</Text>
                 </View>
             </ScrollView>
         </View>

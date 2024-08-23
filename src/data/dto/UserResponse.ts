@@ -3,11 +3,11 @@ export interface UserResponse {
 }
 
 interface UserData {
-    items: Array<User>;
+    items: Array<UserItem>;
     count: number;
 }
 
-export interface User {
+export interface UserItem {
     id: string;
     full_name: string;
     is_private: boolean;
