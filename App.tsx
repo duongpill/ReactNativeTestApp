@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Home from "./src/screen/Home";
-import Search from "./src/screen/Search";
-import Detail from "./src/screen/Detail";
+import Home from "./src/presentation/Home";
+import Search from "./src/presentation/Search";
+import Detail from "./src/presentation/Detail";
 import { DependencyInjections } from "./src/di/DependencyInjections";
 
 const Stack = createNativeStackNavigator();

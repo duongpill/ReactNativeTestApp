@@ -7,7 +7,7 @@ import VideoPlayer from "./VideoPlayer";
 import { Post } from "../../domain/entity/Post";
 
 const PostCard: FC<Post> = ({id, owner, hasLiked, likeCount, caption, isVideo, thumbnailUrl, videoUrl}) => {
-    
+
   const navigation = useNavigation<any>();
 
   const _moveToDetail = () => {
@@ -15,7 +15,7 @@ const PostCard: FC<Post> = ({id, owner, hasLiked, likeCount, caption, isVideo, t
   }
 
   return (
-      <View style={styles.postContainer}>
+      <View key={id} style={styles.postContainer}>
           <View style={styles.postHeader}>
               <FastImage style={styles.avatarStyle}
                   source={{ uri: owner.profile_pic_url }} />
@@ -25,7 +25,7 @@ const PostCard: FC<Post> = ({id, owner, hasLiked, likeCount, caption, isVideo, t
             <Text style={styles.textDescription}>{caption.text}</Text>
             <View style={styles.imageContainer}>
             { isVideo 
-                ? <VideoPlayer url={videoUrl} />
+                ? <VideoPlayer id={id} url={videoUrl} />
                 : <FastImage 
                     style={styles.imageStyle} 
                     resizeMode={FastImage.resizeMode.cover} 

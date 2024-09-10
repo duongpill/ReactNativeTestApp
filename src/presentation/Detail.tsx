@@ -37,7 +37,7 @@ const Detail: FC = ({route}: any) => {
                 <Text style={styles.textDescription}>{post?.caption?.text}</Text>
                 <View style={styles.imageContainer}>
                 { post?.isVideo 
-                    ? <VideoPlayer url={post?.videoUrl} />
+                    ? <VideoPlayer id={id} url={post?.videoUrl} />
                     : <FastImage 
                         style={styles.imageStyle} 
                         resizeMode={FastImage.resizeMode.cover} 

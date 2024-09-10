@@ -4,10 +4,11 @@ import { bufferConfig, defaultValue } from "../../utils/Constants";
 import styles from "../../../styles/PostStyles";
 
 interface VideoPlayerProps{
+    id: string;
     url: string;
 }
 
-const VideoPlayer: FC<VideoPlayerProps> = ({url}) => {
+const VideoPlayer: FC<VideoPlayerProps> = ({id, url}) => {
     
     const videoRef = useRef<VideoRef>(null);
     const [state, setState] = useState(defaultValue);
@@ -36,23 +37,24 @@ const VideoPlayer: FC<VideoPlayerProps> = ({url}) => {
 
     return (
         <Video
-        ref={videoRef}
-        style={styles.videoStyle}
-        source={{uri: url}}
-        paused={false}
-        preventsDisplaySleepDuringVideoPlayback={true}
-        bufferingStrategy={BufferingStrategyType.DEFAULT}
-        onAspectRatio={onAspectRatio}
-        onBuffer={onVideoBuffer}
-        bufferConfig={{
-            ...bufferConfig,
-            cacheSizeMB: state.useCache ? 200 : 0,
-        }}
-        playInBackground={false}
-        playWhenInactive={false}
-        repeat={true}
-        onProgress={onProgress}
-        onError={onError} />
+            key={id}
+            ref={videoRef}
+            style={styles.videoStyle}
+            source={{uri: url}}
+            paused={false}
+            preventsDisplaySleepDuringVideoPlayback={true}
+            bufferingStrategy={BufferingStrategyType.DEFAULT}
+            onAspectRatio={onAspectRatio}
+            onBuffer={onVideoBuffer}
+            bufferConfig={{
+                ...bufferConfig,
+                cacheSizeMB: state.useCache ? 200 : 0,
+            }}
+            playInBackground={false}
+            playWhenInactive={false}
+            repeat={true}
+            onProgress={onProgress}
+            onError={onError} />
     )
 }
 

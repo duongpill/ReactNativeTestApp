@@ -8,11 +8,11 @@ import React from 'react';
 // Note: import explicitly to use the types shipped with jest.
 import {describe, expect, it, jest, test} from '@jest/globals';
 
-import Header from '../src/screen/components/Header';
+import Header from '../src/presentation/components/Header';
 import { act, fireEvent, render, waitFor, waitForElementToBeRemoved } from '@testing-library/react-native';
 
 import { API } from '../src/utils/Constants';
-import Home from '../src/screen/Home';
+import Home from '../src/presentation/Home';
 
 const mockedDispatch = jest.fn();
 

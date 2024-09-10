@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -30,20 +30,19 @@ const Home: FC = () => {
     fetchData()
   }, []);
 
-  const fetchData = async() => {
+  const fetchData = useCallback(async () => {
     if(loading) {
       return;
     }
 
     setLoading(true)
     var postResponse = await DependencyInjections.instance().getPostsUseCase(paginationToken)
-    console.log("data: " + postResponse + " -- " + paginationToken)
     if(postResponse){
-      setItems([...items, ...postResponse.posts])
+      setItems((currentItems) => [...currentItems, ...postResponse?.posts!])
       setPaginationToken(postResponse.paginationToken)
     }
     setLoading(false)
-  }
+  }, [paginationToken]);
 
   const loadMore = () => {
     if(!loading){
@@ -51,39 +50,39 @@ const Home: FC = () => {
     }
   }
 
-  const renderFooter = () => {
+  const renderFooter = useMemo(() => {
+    console.log('renderFooter')
     return (
       <View>
         <Text></Text>
         {(loading && items.length > 0) && <ActivityIndicator />}
       </View>
     )
-  };
+  }, [items]);
 
   const handleEmpty = () => {
+    console.log('handleEmpty')
     return !loading && <Text style={styles.textEmpty}>Data not found!</Text>;
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <HomeHeader title="Home" />
-        {(items.length == 0) && <Loading isLoading={loading} />}
-        <View style={styles.flatListContainer}>
-          <FlatList
-            data={items}
-            contentContainerStyle={{ gap: 10, flexGrow: 1 }}
-            showsVerticalScrollIndicator={false}
-            renderItem={({item}) => (
-              <PostCard {...item} />
-            )}
-            keyExtractor={(index) => index.toString()}
-            ListEmptyComponent={handleEmpty}
-            ListFooterComponent={renderFooter}
-            onEndReached={loadMore}
-            onEndReachedThreshold={0.1}
-          />
-        </View>
+      <HomeHeader title="Home" />
+      {(items.length == 0) && <Loading isLoading={loading} />}
+      <View style={styles.flatListContainer}>
+        <FlatList
+          data={items}
+          contentContainerStyle={{ gap: 10, flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => (
+            <PostCard {...item} />
+          )}
+          keyExtractor={(index) => index.toString()}
+          ListEmptyComponent={handleEmpty}
+          ListFooterComponent={renderFooter}
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.1}
+        />
       </View>
     </SafeAreaView>
   );
